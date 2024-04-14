@@ -13,10 +13,17 @@ import java.net.http.HttpResponse;
 
 public class Main {
     static Dotenv dotenv = Dotenv.load();
-    private static String API_PARAMETERS = "period=latest-month&";
+    private static String API_PARAMETERS = "period=latest-hour&";
     private static String API = String.format("https://dmigw.govcloud.dk/v2/lightningdata/collections/observation/items?%sapi-key=%s", API_PARAMETERS, dotenv.get("API_KEY"));
 
     public static void main(String[] args) {
+        //polling
+
+        //hive data fra lightningInstance ud og dele det op i de kategorier der skal bruges i databasen
+        JSONObject lightning = lightningInstance();
+
+    }
+    public static JSONObject lightningInstance () {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API))
                 .method("GET", HttpRequest.BodyPublishers.noBody())
@@ -30,9 +37,9 @@ public class Main {
         }
 
         JsonObject j = new JsonParser().parse(response.body()).getAsJsonObject();
-        JSONObject obj = new JSONObject(j.asMap());
+        JSONObject lightning = new JSONObject(j.asMap());
 
-        System.out.println(obj.get("numberReturned"));
-
+        System.out.println(lightning.get("numberReturned"));
+        return lightning;
     }
 }
