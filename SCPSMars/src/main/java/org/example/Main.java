@@ -49,6 +49,16 @@ public class Main {
             LocalDate date = dateTime.toLocalDate();
 
             db.insertIntoDB(date, dateTime, type);
+
+            /*System.out.println("Lyn i dag : " + db.numberOfLightningsDay(date));
+            System.out.println(LocalDate.now());
+            System.out.println(date);*/
+
+            System.out.println(db.numberOfLightningsType(1));
+
         }
+        //System.out.println("Now: " + LocalDate.now());
+        //db.numberOfLightningsWeek(LocalDate.now());
+
     }
 }

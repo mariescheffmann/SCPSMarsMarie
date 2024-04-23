@@ -17,22 +17,65 @@ public class Database {
             throw new RuntimeException(e);
         }
     }
-    public void fetch() {
 
-        // querry database for users with cpr x
+    public int numberOfLightningsWeek(LocalDate date) {
+        int amount = 0;
+        for (int i=0; i<7; i++) {
+            amount = amount + numberOfLightningsDay(date.minusDays(i));
+        }
+        return amount;
+    }
+
+    public int numberOfLightningsDay(LocalDate date) {
+        // querry database for amount of lightning on a specific day
         try {
-            PreparedStatement querryStatement = connection.prepareStatement("SELECT * FROM lightningdb.type");
+            PreparedStatement querryStatement = connection.prepareStatement("SELECT * FROM lightningdb.day WHERE date = ?");
+            querryStatement.setDate(1, Date.valueOf(date));
             ResultSet querryResultSet = querryStatement.executeQuery();
 
-            System.out.println("The following matched the querry:");
-            while (querryResultSet.next()){
-                System.out.println("type: "+querryResultSet.getString("type_name"));
+            if (querryResultSet.next()) {
+                return querryResultSet.getInt("total_lightnings");
+            } else {
+                return 0;
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    public int getCurrentDayId() {
+        try {
+            PreparedStatement querryStatement = connection.prepareStatement("SELECT * FROM lightningdb.day WHERE date = ?");
+            querryStatement.setDate(1, Date.valueOf(LocalDate.now()));
+            ResultSet querryResultSet = querryStatement.executeQuery();
+
+            if (querryResultSet.next()) {
+                return querryResultSet.getInt("id");
+            } else {
+                return -1;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int numberOfLightningsType(int typeId) {
+        int dayId = getCurrentDayId();
+        // querry database for amount of lightning on a specific day
+        try {
+            PreparedStatement querryStatement = connection.prepareStatement("SELECT * FROM lightningdb.lightning WHERE day_id = ? AND type_id = ?");
+            querryStatement.setInt(1, dayId);
+            querryStatement.setInt(2, typeId);
+            ResultSet querryResultSet = querryStatement.executeQuery();
+
+            int amount = 0;
+            while (querryResultSet.next()) {
+                amount++;
+            }
+            return amount;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public int saveDate(LocalDate date) {
