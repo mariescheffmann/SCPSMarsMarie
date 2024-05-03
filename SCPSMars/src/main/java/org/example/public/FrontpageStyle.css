@@ -1,0 +1,8 @@
+.outerContainer {
+    display: flex;
+    color: blue;
+}
+
+.test {
+    color: red;
+}

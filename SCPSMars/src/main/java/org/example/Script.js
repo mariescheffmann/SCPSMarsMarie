@@ -1,5 +1,5 @@
-const backendApi;
+// const backendApi;
 
-var javaDatabase = new Database();
-var lightningsDay = javaDatabase.numberOfLightningsToday();
+// var javaDatabase = new Database();
+// var lightningsDay = javaDatabase.numberOfLightningsToday();
 
