@@ -1,44 +1,13 @@
-const httpInstance = require('http');
-const httpStatusInstance = require('http-status-codes');
-const fsInstance = require('fs');
+const express = require('express');
+const app = express();
 const portNumber = 8080;
 
-const http = require('http');
-const fs = require('fs');
+app.use(express.static('public'));
 
-// Create a server instance
-const httpServer = http.createServer((req, res) => {
-    fs.readFile('Frontpage.html', (err, data) => {
-        if (err) {
-            console.error('Error reading HTML file:', err);
-            res.statusCode = 500;
-            res.end('Internal Server Error');
-        } else {
-            res.setHeader('Content-Type', 'text/html');
-            res.statusCode = 200;
-            res.end(data);
-        }
-    });
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/public/Frontpage.html');
 });
 
-// Setup the server to listen on port 8080
-httpServer.listen(portNumber, () => {
+app.listen(portNumber, () => {
     console.log('Server is listening on port ' + portNumber);
 });
-
-// Read file
-const readFile = (file_path, res) => {
-    if (fsInstance.existsSync(file_path)) {
-        fsInstance.readFile(file_path, (error, data) => {
-            if (error) {
-                console.log(error);
-                handleError(res);
-                return;
-            }
-            res.write(data);
-            res.end();
-        });
-    } else {
-        handleError(res);
-    }
-};
