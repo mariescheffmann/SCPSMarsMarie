@@ -6,6 +6,7 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.time.LocalDate;
+import java.util.Map;
 
 public class SimpleHttpServer {
 
@@ -91,12 +92,31 @@ public class SimpleHttpServer {
         }
     }
 
+    static class FullWeekHandeler implements HttpHandler {
+        @Override
+        public void handle(HttpExchange exchange) throws IOException {
+            // Set response headers
+            exchange.getResponseHeaders().set("Content-Type", "text/plain");
+            setCorsHeaders(exchange);
+
+            // Get data for a full week
+            Database db = new Database();
+            Map fullWeekMap = db.fullWeekLightnings(LocalDate.now());
+
+            // Send response
+            String response = fullWeekMap.toString();
+            exchange.sendResponseHeaders(200, response.getBytes().length);
+            OutputStream os = exchange.getResponseBody();
+            os.write(response.getBytes());
+            os.close();
+        }
+    }
+
     public static void setCorsHeaders(HttpExchange exchange) {
         exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "http://localhost:8080");
         exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
         exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type, Authorization");
         exchange.getResponseHeaders().add("Access-Control-Allow-Credentials", "true");
-
     }
 }
 

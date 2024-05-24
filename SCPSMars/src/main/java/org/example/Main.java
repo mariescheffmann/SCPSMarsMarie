@@ -75,6 +75,7 @@ public class Main {
         server.createContext("/api/week", new SimpleHttpServer.ThisWeekHandler());
         server.createContext("/api/cloudToCloud", new SimpleHttpServer.CloudToCloudHandler());
         server.createContext("/api/cloudToGround", new SimpleHttpServer.CloudToGroundHandler());
+        server.createContext("/api/fullWeek", new SimpleHttpServer.FullWeekHandeler());
 
         server.setExecutor(null); // Use the default executor
 

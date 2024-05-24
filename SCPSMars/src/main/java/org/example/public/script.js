@@ -1,8 +1,28 @@
 const url = 'http://localhost:8000';
 
+const xValues = [];
+const yValues = [];
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: xValues,
+        datasets: [{
+            label: 'Lightning Strikes',
+            fill: false,
+            lineTension: 0,
+            backgroundColor: '#385592',
+            borderColor: '#385592',
+            data: yValues
+        }]
+    },
+    options: {}
+});
+
 setInterval( function() {
     fetchDay();
     fetchWeek();
+    fetchFullWeek();
     fetchCloudToGround();
     fetchCloudToCloud();
 }, 1000);
@@ -36,6 +56,28 @@ function fetchWeek() {
             throw error;
         });
     }
+
+function fetchFullWeek() {
+    return fetch(url + '/api/fullWeek')
+        .then(response => response.text())
+        .then(data => {
+            xValues.length = 0;
+            yValues.length = 0;
+
+            data.slice(1, -1).split(", ").forEach(pair => {
+                const [date, lightning] = pair.split("=");
+                xValues.push(date);
+                yValues.push(Number(lightning));
+            });
+
+            myChart.data.labels = xValues;
+            myChart.data.datasets[0].data = yValues;
+            myChart.update();
+        })
+        .catch(error => {
+            console.error('Error fetching full week data:', error);
+        });
+}
 
 function fetchCloudToGround() {
     return fetch(url + '/api/cloudToGround')
