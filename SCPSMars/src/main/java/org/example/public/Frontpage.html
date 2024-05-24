@@ -6,20 +6,48 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Lightning</title>
     <link rel="stylesheet" href="./FrontpageStyle.css">
+    <script src="script.js" type="module"></script>
 </head>
 <body>
 <main>
     <div class="outerContainer">
-        <div class="graphicalLightningsContainer">
-            <h1>Lightning Data</h1>
+        <div class="graphicLightningContainer">
+            <div class="graphicLightningHeaderContainer">
+                <h1 class="upperHeader">Lyn fra midnat:</h1>
+            </div>
+            <div class="graphicLightningGraphics">
+                <!functionality to draw lightnings based on data>
+            </div>
         </div>
-        <div class="test" id="lightningInfoContainer">
-            Something
+        <div class="lightningInfoContainer">
+            <div class="lightningInfoHeaderContainer">
+                <h1 class="upperHeader">Lyn Info:</h1>
+            </div>
+            <div class="infoContainer" id="infoTenMinContainer">
+                <h1 class="containerHeader">Lyn de sidste 10 min:</h1>
+                <h1 class="containerHeader">1</h1>
+            </div>
+            <div class="infoContainer" id="infoTodayContainer">
+                <h1 class="containerHeader">Lyn i dag:</h1>
+                <h1 class="containerHeader" id="textToday">2</h1>
+            </div>
+            <div class="infoContainer" id="infoThisWeekContainer">
+                <h1 class="containerHeader">Lyn i denne uge:</h1>
+                <h1 class="containerHeader" id="textThisWeek"></h1>
+            </div>
+            <div class="infoContainer" id="infoStatisticsContainer">
+                <h1>Include graph here</h1>
+            </div>
+            <div class="graphicsExplanationContainer">
+                <div class="smallExplanationContainer">
+                    <h1 class="containerHeader">Sky til jord:</h1>
+                </div>
+                <div class="smallExplanationContainer">
+                    <h1 class="containerHeader" id="skyToSky">Sky til sky:</h1>
+                </div>
+            </div>
         </div>
-
-        <div id="day-data">Loading...</div> <!-- Div to display fetched data -->
     </div>
 </main>
-<script src="script.js" type="module"></script>
 </body>
 </html>
