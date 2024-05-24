@@ -1,5 +1,7 @@
 const url = 'http://localhost:8000';
 
+const container = document.getElementById('icon-container');
+
 const xValues = [];
 const yValues = [];
 const ctx = document.getElementById('myChart').getContext('2d');
@@ -20,12 +22,17 @@ const myChart = new Chart(ctx, {
 });
 
 setInterval( function() {
+    clearLightnings();
     fetchDay();
     fetchWeek();
     fetchFullWeek();
     fetchCloudToGround();
     fetchCloudToCloud();
 }, 1000);
+
+function clearLightnings() {
+    container.innerHTML = '';
+}
 
 function fetchDay() {
     return fetch(url + '/api/day')
@@ -86,7 +93,7 @@ function fetchCloudToGround() {
             return response.text();
         })
         .then(data => {
-            //
+            insertIcons(data, 'cloudToGroundLightningSmall');
         })
         .catch(error => {
             console.error('Error fetching state:', error);
@@ -101,10 +108,19 @@ export const fetchCloudToCloud = () => {
             return response.text();
         })
         .then(data => {
-            //
+            insertIcons(data, 'cloudToCloudLightningSmall');
         })
         .catch(error => {
             console.error('Error fetching state:', error);
             throw error;
         });
 };
+
+function insertIcons(count, style) {
+    for (let i = 0; i < count; i++) {
+        const icon = document.createElement('ion-icon');
+        icon.name = 'flash';
+        icon.className = style;
+        container.appendChild(icon);
+    }
+}
