@@ -47,22 +47,27 @@ html {
 }
 
 .smallExplanationContainer {
+    display: flex;
+    flex-direction: column;
     background-color: #b8c6e4;
     margin-bottom: 20px;
     margin-top: 20px;
     margin-right: 40px;
     border-color: black;
     width: 50%;
+    align-items: center;
 }
 
 .cloudToGroundLightning {
     color: yellow;
     font-size: 64px;
     border-color: black;
+    padding-bottom: 10px;
 }
 
 .cloudToCloudLightning {
     color: white;
     font-size: 64px;
     border-color: black;
+    padding-bottom: 10px;
 }
