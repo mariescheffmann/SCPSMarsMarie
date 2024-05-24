@@ -14,10 +14,34 @@
             <h1>Lightning Data</h1>
         </div>
         <div class="test" id="lightningInfoContainer">
-            Something
+            Somethigfredwng
         </div>
+
+        <div id="day-data">Loading...</div> <!-- Div to display fetched data -->
+
+        <script type="module">
+            import { fetchDay } from './script.js'; // Adjust the path if necessary
+
+            const displayData = (data) => {
+                const dayDataDiv = document.getElementById('day-data');
+                dayDataDiv.textContent = data;
+            };
+
+            // Call the fetchDay function and handle the result
+            fetchDay()
+                .then(data => {
+                    console.log('Fetched data:', data);
+                    displayData(data); // Display fetched data in the div
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    const dayDataDiv = document.getElementById('day-data');
+                    dayDataDiv.textContent = 'Error fetching data.';
+                });
+        </script>
+
     </div>
 </main>
-<script src="Script.js"></script>
+<script src="script.js" type="module"></script>
 </body>
 </html>

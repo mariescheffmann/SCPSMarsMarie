@@ -14,7 +14,7 @@ public class SimpleHttpServer {
         public void handle(HttpExchange exchange) throws IOException {
             // Set response headers
             exchange.getResponseHeaders().set("Content-Type", "text/plain");
-            exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "");
+            setCorsHeaders(exchange);
 
             // Get the number for today
             Database db = new Database();
@@ -34,7 +34,7 @@ public class SimpleHttpServer {
         public void handle(HttpExchange exchange) throws IOException {
             // Set response headers
             exchange.getResponseHeaders().set("Content-Type", "text/plain");
-            exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "");
+            setCorsHeaders(exchange);
 
             // Get the number for yesterday
             Database db = new Database();
@@ -54,7 +54,7 @@ public class SimpleHttpServer {
         public void handle(HttpExchange exchange) throws IOException {
             // Set response headers
             exchange.getResponseHeaders().set("Content-Type", "text/plain");
-            exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "");
+            setCorsHeaders(exchange);
 
             // Get the number for yesterday
             Database db = new Database();
@@ -76,7 +76,7 @@ public class SimpleHttpServer {
         public void handle(HttpExchange exchange) throws IOException {
             // Set response headers
             exchange.getResponseHeaders().set("Content-Type", "text/plain");
-            exchange.getResponseHeaders().set("Access-Control-Allow-Origin", "");
+            setCorsHeaders(exchange);
 
             // Get the number for yesterday
             Database db = new Database();
@@ -89,6 +89,14 @@ public class SimpleHttpServer {
             os.write(response.getBytes());
             os.close();
         }
+    }
+
+    public static void setCorsHeaders(HttpExchange exchange) {
+        exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "http://localhost:8080");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Credentials", "true");
+
     }
 }
 

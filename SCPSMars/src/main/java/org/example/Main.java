@@ -23,7 +23,7 @@ import java.util.Locale;
 
 public class Main {
     static Dotenv dotenv = Dotenv.load();
-    private static String API_PARAMETERS = "period=latest-day&";
+    private static String API_PARAMETERS = "period=latest-10-minutes&";
     private static String API = String.format("https://dmigw.govcloud.dk/v2/lightningdata/collections/observation/items?%sapi-key=%s", API_PARAMETERS, dotenv.get("API_KEY"));
 
     public static void main(String[] args) throws IOException {
@@ -75,6 +75,8 @@ public class Main {
         server.createContext("/api/week", new SimpleHttpServer.ThisWeekHandler());
         server.createContext("/api/cloudToCloud", new SimpleHttpServer.CloudToCloudHandler());
         server.createContext("/api/cloudToGround", new SimpleHttpServer.CloudToGroundHandler());
+
+        server.setExecutor(null); // Use the default executor
 
         // Start the server
         server.start();
