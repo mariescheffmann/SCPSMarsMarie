@@ -19,4 +19,4 @@ CREATE TABLE lightning (
     type_id INTEGER NOT NULL
 );
 
-INSERT INTO type (type_name) VALUES ('cloud_to_cloud_negative'),('cloud_to_cloud_positive'),('cloud_to_ground');
+INSERT INTO type (type_name) VALUES ('cloud_to_ground_negative'),('cloud_to_ground_positive'),('cloud_to_cloud');
