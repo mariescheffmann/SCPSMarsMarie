@@ -23,16 +23,33 @@ const myChart = new Chart(ctx, {
 
 setInterval( function() {
     clearLightnings();
+    fetchTenMinutes();
     fetchDay();
     fetchWeek();
     fetchFullWeek();
     fetchCloudToGround();
     fetchCloudToCloud();
-}, 1000);
+}, 600000);
 
 function clearLightnings() {
     container.innerHTML = '';
 }
+
+function fetchTenMinutes() {
+    return fetch(url + '/api/tenMinutes')
+        .then(response => {
+            console.log('Response:', response);
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById("textTenMinutes").innerText = data;
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Error fetching state:', error);
+            throw error;
+        });
+};
 
 function fetchDay() {
     return fetch(url + '/api/day')
