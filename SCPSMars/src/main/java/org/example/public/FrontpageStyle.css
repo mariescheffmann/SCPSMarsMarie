@@ -54,3 +54,15 @@ html {
     border-color: black;
     width: 50%;
 }
+
+.cloudToGroundLightning {
+    color: yellow;
+    font-size: 64px;
+    border-color: black;
+}
+
+.cloudToCloudLightning {
+    color: white;
+    font-size: 64px;
+    border-color: black;
+}

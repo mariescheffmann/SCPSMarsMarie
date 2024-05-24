@@ -37,11 +37,14 @@ function fetchWeek() {
         });
     }
 
-export const fetchCloudToGround = () => {
+function fetchCloudToGround() {
     return fetch(url + '/api/cloudToGround')
         .then(response => {
             console.log('Response:', response);
             return response.text();
+        })
+        .then(data => {
+            //
         })
         .catch(error => {
             console.error('Error fetching state:', error);
@@ -54,6 +57,9 @@ export const fetchCloudToCloud = () => {
         .then(response => {
             console.log('Response:', response);
             return response.text();
+        })
+        .then(data => {
+            //
         })
         .catch(error => {
             console.error('Error fetching state:', error);
