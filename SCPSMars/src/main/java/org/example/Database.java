@@ -4,6 +4,8 @@ import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Database {
     static Connection connection = null;
@@ -24,6 +26,17 @@ public class Database {
             amount = amount + numberOfLightningsDay(date.minusDays(i));
         }
         return amount;
+    }
+
+    public Map<LocalDate, Integer> fullWeekLightnings(LocalDate lastDay) {
+        LocalDate firstDay = lastDay.minusDays(6);
+        Map map = new LinkedHashMap();
+        for (int i=0; i<7; i++) {
+            LocalDate date = firstDay.plusDays(i);
+            map.put(date, numberOfLightningsDay(date));
+        }
+        System.out.println(map);
+        return map;
     }
 
     public int numberOfLightningsDay(LocalDate date) {

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lightning</title>
+    <link rel="stylesheet" href="./FrontpageStyle.css">
+    <script src="script.js" type="module"></script>
+    <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+<main>
+    <div class="outerContainer">
+        <div class="graphicLightningContainer">
+            <div class="graphicLightningHeaderContainer">
+                <h1 class="upperHeader">Lyn fra midnat:</h1>
+            </div>
+            <div class="graphicLightningGraphics" id="icon-container"> </div>
+        </div>
+        <div class="lightningInfoContainer">
+            <div class="lightningInfoHeaderContainer">
+                <h1 class="upperHeader">Lyn Info:</h1>
+            </div>
+            <div class="infoContainer" id="infoTenMinContainer">
+                <h1 class="containerHeader">Lyn de sidste 10 min:</h1>
+                <h1 class="containerHeader">1</h1>
+            </div>
+            <div class="infoContainer" id="infoTodayContainer">
+                <h1 class="containerHeader">Lyn i dag:</h1>
+                <h1 class="containerHeader" id="textToday">2</h1>
+            </div>
+            <div class="infoContainer" id="infoThisWeekContainer">
+                <h1 class="containerHeader">Lyn i denne uge:</h1>
+                <h1 class="containerHeader" id="textThisWeek"></h1>
+            </div>
+            <div class="infoContainer" id="infoStatisticsContainer">
+                <canvas id="myChart" style="width:100%;max-width:700px;"></canvas>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"> </script>
+            </div>
+            <div class="graphicsExplanationContainer">
+                <div class="smallExplanationContainer">
+                    <h1 class="containerHeader">Sky til jord:</h1>
+                    <ion-icon name="flash" class="cloudToGroundLightning"></ion-icon>
+                </div>
+                <div class="smallExplanationContainer">
+                    <h1 class="containerHeader" id="skyToSky">Sky til sky:</h1>
+                    <ion-icon name="flash" class="cloudToCloudLightning"></ion-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,83 @@
+html {
+    background-color: #385592;
+}
+
+.outerContainer {
+    display: flex;
+}
+
+.graphicLightningContainer {
+    width: 60%;
+}
+
+.graphicLightningHeaderContainer {
+    padding-top: 10px;
+    padding-left: 20px;
+}
+.upperHeader {
+    font-family: sans-serif;
+    font-size: x-large;
+    color: white;
+    margin-right: 60px;
+    margin-left: 20px;
+}
+
+.lightningInfoContainer {
+    width: 40%;
+}
+
+.infoContainer {
+    display: flex;
+    background-color: #b8c6e4;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-right: 40px;
+    border-color: black;
+}
+
+.containerHeader {
+    font-family: sans-serif;
+    font-size: x-large;
+    color: #385592;
+    margin-left: 20px;
+    width: 60%;
+}
+.graphicsExplanationContainer {
+    display: flex;
+}
+
+.smallExplanationContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: #b8c6e4;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-right: 40px;
+    border-color: black;
+    width: 50%;
+    align-items: center;
+}
+
+.cloudToGroundLightning {
+    color: yellow;
+    font-size: 64px;
+    padding-bottom: 10px;
+}
+
+.cloudToCloudLightning {
+    color: white;
+    font-size: 64px;
+    padding-bottom: 10px;
+}
+
+.cloudToGroundLightningSmall {
+    color: yellow;
+    font-size: 32px;
+    padding-bottom: 5px;
+}
+
+.cloudToCloudLightningSmall {
+    color: white;
+    font-size: 32px;
+    padding-bottom: 5px;
+}
