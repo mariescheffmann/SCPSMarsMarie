@@ -1,4 +1,4 @@
-package org.example;
+package org.example.buisness;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.example.persistence.Database;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -27,8 +28,7 @@ public class SimpleHttpServer {
     static class tenMinuteHandler implements HttpHandler {
         @Override
         public void handle (HttpExchange exchange) throws IOException {
-            Database db = new Database();
-            db.setup();
+            Database db = Database.getInstance();
 
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(API))
@@ -76,7 +76,7 @@ public class SimpleHttpServer {
             setCorsHeaders(exchange);
 
             // Get the number for today
-            Database db = new Database();
+            Database db = Database.getInstance();
             int numberToday = db.numberOfLightningsDay(LocalDate.now());
 
             // Send response
@@ -96,7 +96,7 @@ public class SimpleHttpServer {
             setCorsHeaders(exchange);
 
             // Get the number for yesterday
-            Database db = new Database();
+            Database db = Database.getInstance();
             int numberLightningsWeek = db.numberOfLightningsWeek(LocalDate.now());
 
             // Send response
@@ -116,7 +116,7 @@ public class SimpleHttpServer {
             setCorsHeaders(exchange);
 
             // Get the number for yesterday
-            Database db = new Database();
+            Database db = Database.getInstance();
             int numberLightningsType1 = db.numberOfLightningsType(1);
             int numberLightningsType2 = db.numberOfLightningsType(2);
             int numberOfLightningsCloud = numberLightningsType1 + numberLightningsType2;
@@ -138,7 +138,7 @@ public class SimpleHttpServer {
             setCorsHeaders(exchange);
 
             // Get the number for yesterday
-            Database db = new Database();
+            Database db = Database.getInstance();
             int numberOfLightningsCloud = db.numberOfLightningsType(3);
 
             // Send response
@@ -158,7 +158,7 @@ public class SimpleHttpServer {
             setCorsHeaders(exchange);
 
             // Get data for a full week
-            Database db = new Database();
+            Database db = Database.getInstance();
             Map fullWeekMap = db.fullWeekLightnings(LocalDate.now());
 
             // Send response

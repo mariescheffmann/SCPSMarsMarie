@@ -1,4 +1,4 @@
-package org.example;
+package org.example.persistence;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.*;
@@ -8,16 +8,24 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Database {
+    private static Database instance;
     static Connection connection = null;
     static Dotenv dotenv = Dotenv.load();
 
-    public void setup() {
+    private Database() {
         try {
             DriverManager.registerDriver(new org.postgresql.Driver());
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/lightning","postgres", dotenv.get("password"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static Database getInstance() {
+        if (instance == null) {
+            instance = new Database();
+        }
+        return instance;
     }
 
     public int numberOfLightningsWeek(LocalDate date) {
